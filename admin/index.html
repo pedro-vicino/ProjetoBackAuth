@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+        </style>
+    <title>Live 02</title>
+    <script src="js/crud.js" defer type="module"></script>
+
+</head>
+
+<body>
+    <header class="header">
+        <p class="titulo_page">Sistema de Gerenciamento de Livros</p>
+
+        <div class="acoes">
+            <p alt="" class="acoes_user acao_login"> Login </p>
+            <p>/</p>
+            <p alt="" class="acoes_user acao_register"> Registrar </p>
+        </div>
+
+
+        <div class="input_login">
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email_login" id="email_login" placeholder="Digite seu email" required />
+            </div>
+            <div class="form-group">
+                <label for="password">Senha:</label>
+                <input type="password" id="password_login" placeholder="Digite sua senha" required />
+            </div>
+            <button type="submit" class="login-button ">Entrar</button>
+        </div>
+
+
+        <div class="input_login input_register">
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email_register" placeholder="Digite seu email_register" required />
+            </div>
+            <div class="form-group">
+                <label for="email">Nome:</label>
+                <input type="email" id="nome_register" placeholder="Digite seu email" required />
+            </div>
+            <div class="form-group">
+                <label for="password">Senha:</label>
+                <input type="password" id="password_register" placeholder="Digite sua senha" required />
+            </div>
+            <button type="submit" class="login-button register-button">Entrar</button>
+
+        </div>
+
+
+    </header>
+
+    <div id="principal">
+        <h1>Cadastro de Livros</h1>
+        <form id="form">
+            <label>Title</label>
+            <input type="text" name="txt_title" id="title"><br>
+            <label>SubTitle</label>
+            <textarea id="subtitle"></textarea><br>
+            <label>Imagem</label>
+            <input type="text" name="txt_image" id="image"><br>
+            <label>Price</label>
+            <input type="text" name="txt_price" id="price"><br>
+            <div id="salvar"> Salvar </div>
+        </form>
+    </div>
+
+    <div id="listLivros">
+        <h1> Listagem de Livros </h1>
+        <div class="linha">
+            <div class="titulo">Title</div>
+            <div class="titulo">Subtitle</div>
+            <div class="titulo">Price</div>
+            <div class="titulo">Opções</div>
+        </div>
+        <div id="listDados">
+
+        </div>
+
+    </div>
+
+    <footer>
+        <span>Desenvolvido por: Marcel Neves Teixeira </script></span>
+    </footer>
+</body>
+
+</html>
