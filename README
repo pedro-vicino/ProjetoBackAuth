@@ -1,144 +1,144 @@
+# Documentação da Estrutura de Diretórios - API Livraria
 
-### Documentação da Estrutura de Diretórios - API Livraria
+## Estrutura de Diretórios
 
-#### controllers/
-- **Responsabilidade**: Controlam o fluxo de dados entre `routes`, `services` e `models`. Realizam a lógica de negócios básica e manipulam requisições HTTP.
+### `database/`
+- **Objetivo**: Realiza a configuração e a gestão da conexão com o banco de dados.
+- **Exemplo**: Configurações de ORM ou conexões utilizando bibliotecas como `Prisma`, `TypeORM` ou `Sequelize`.
+
+### `controllers/`
+- **Objetivo**: Gerencia a interação entre as `routes`, `services` e `models`, implementando a lógica de negócios e tratando as requisições HTTP.
 - **Exemplo**: Métodos como `getBooks`, `createBook`, `updateBook`, `deleteBook`.
 
-#### database/
-- **Responsabilidade**: Configuração e conexão com o banco de dados.
-- **Exemplo**: Configuração de ORM, ou instâncias de conexão como `Prisma`, `TypeORM` ou `Sequelize`.
+### `migrations/`
+- **Objetivo**: Scripts que são responsáveis pela criação, modificação ou exclusão de tabelas no banco de dados.
+- **Exemplo**: Arquivos `.ts` para a criação da tabela `books` ou inclusão de novos campos como `price`.
 
-#### helpers/
-- **Responsabilidade**: Funções auxiliares ou utilitárias que são usadas em diferentes partes do projeto.
-- **Exemplo**: Funções de formatação de datas, geração de IDs ou validação de campos.
+### `models/`
+- **Objetivo**: Define as entidades e suas estruturas de dados, assim como a interação com o banco de dados.
+- **Exemplo**: Modelos de dados como `Book` e `User`, incluindo campos e suas relações.
 
-#### migrations/
-- **Responsabilidade**: Scripts para a criação, alteração ou remoção de tabelas no banco de dados.
-- **Exemplo**: Arquivos `.ts` que criam a tabela `books` ou adicionam campos como `price`.
+### `helpers/`
+- **Objetivo**: Contém funções utilitárias que podem ser reutilizadas em diferentes partes do código.
+- **Exemplo**: Funções para formatação de datas, geração de identificadores ou validações gerais.
 
-#### models/
-- **Responsabilidade**: Definem as estruturas de dados (entidades) e sua interação com o banco.
-- **Exemplo**: Definições de `Book`, `User`, incluindo campos e relações.
-
-#### repository/
-- **Responsabilidade**: Camada responsável por interagir diretamente com o banco de dados. Realiza as operações CRUD.
-- **Exemplo**: Métodos como `findAllBooks`, `findBookById`, `saveBook`, `deleteBook`.
-
-#### routes/
-- **Responsabilidade**: Define as rotas da API, associando URLs a seus respectivos controladores.
+### `routes/`
+- **Objetivo**: Define as rotas da API, associando URLs aos controladores que devem manipulá-las.
 - **Exemplo**: `GET /books`, `POST /books`, `PUT /books/:id`, `DELETE /books/:id`.
 
-#### services/
-- **Responsabilidade**: Implementam a lógica de negócios da aplicação. Interagem com o `repository` para manipulação de dados.
-- **Exemplo**: Validações de negócios, como verificar se um livro já existe antes de criar.
-
-#### server.ts
-- **Responsabilidade**: Ponto de entrada da aplicação. Configura o servidor, rotas e middleware.
-- **Exemplo**: Inicialização do `Express`, configuração de `CORS`, e início da escuta na porta.
+### `repository/`
+- **Objetivo**: Camada responsável pela interação direta com o banco de dados, realizando operações de CRUD.
+- **Exemplo**: Funções como `findAllBooks`, `findBookById`, `saveBook`, `deleteBook`.
 
 
+### `services/`
+- **Objetivo**: Implementa a lógica de negócios, interagindo com o `repository` para manipular os dados conforme as regras da aplicação.
+- **Exemplo**: Validações, como verificar se um livro já existe antes de tentar cadastrá-lo.
+
+### `server.ts`
+- **Objetivo**: Serve como ponto de entrada da aplicação, configurando o servidor, as rotas e os middlewares.
+- **Exemplo**: Inicialização do servidor `Express`, configuração do `CORS` e início da escuta na porta.
+
+### URL Base: `http://localhost:3000`
+
+***********************************************
+
+**Livros**
+
+POST: Adicionar Novo Livro  
+  URL: `/v2/livraria/livro`  
+  Body:
+{
+    "title": "Título do Livro",
+    "subtitle": "Subtítulo do Livro",
+    "image": "URL da imagem do livro",
+    "price": "Preço do livro"
+}
 
 
-#### ROTAS:
+PUT: Modificar Livro Existente
+URL: `/v2/livraria/atualizar/livro/:id`
+Body:
+{
+  "title": "Novo título",
+  "subtitle": "Novo subtítulo",
+  "image": "Nova URL da imagem",
+  "price": "Novo preço"
+}
 
-- URL BASE: 'http://localhost:3000'
+
+GET: Listar Todos os Livros
+URL: `/v2/livraria/livros`
+Resposta:
+{
+  "books": [
+    {
+      "title": "Título do Livro",
+      "subtitle": "Subtítulo do Livro",
+      "image": "URL da imagem do livro",
+      "price": "Preço do livro"
+    },
+    ...
+  ]
+}
 
 
-### Books:
-
-- ### POST: Criar Livro /v2/livraria/livro
-    Body: {
-        title,
-        subtitle,
-        image,
-        price,
+GET: Buscar Livro por ID
+URL: `/v2/livraria/livros/:id`
+Resposta:
+{
+  "books": [
+    {
+      "title": "Título do Livro",
+      "subtitle": "Subtítulo do Livro",
+      "image": "URL da imagem do livro",
+      "price": "Preço do livro"
     }
+  ]
+}
+DELETE: Remover Livro
+URL: `/v2/livraria/excluir/livro/:id`
 
-- ### PUT: Atualizar Livro /v2/livraria/atualizar/livro/:id
-    Body: {
-        title,
-        subtitle,
-        image,
-        price,
-    }
-- ### GET: Buscar Todos Livros /v2/livraria/livros
- Body: {
-    books: [
-        {
-            title,
-            subtitle,
-            image,
-            price,
-        },
-        ...
-    ]
- }
-- ### GET: Buscar Pelo ID /v2/livraria/livros/:id
-    Body: {
-    books: [
-        {
-            title,
-            subtitle,
-            image,
-            price,
-        },
-    ]
- }
+***********************************************
 
-- ###  DELETE: delete by id /v2/livraria/excluir/livro/:id
+**Usuários**
 
-### User:
-
-- ###  POST: Register /register
-    body:
-        {
-            email,
-            password,
-            name
-        }
-- ###  POST: Login /login
-    body: {
-            email,
-            password
-        }
+POST: Criar Novo Usuário
+URL: /register
+Body:
+{
+  "email": "usuario@dominio.com",
+  "password": "senha_secreta",
+  "name": "Nome do Usuário"
+}
 
 
+POST: Autenticar Usuário
+URL: /login
+Body:
+{
+  "email": "usuario@dominio.com",
+  "password": "senha_secreta"
+}
 
-Integrantes:
+***********************************************
 
-Vinicius Somogyi - 56337
+Como Executar o Projeto
 
-Wesley Victor - 22581
+**Backend**:
+Acesse a pasta API.
+Execute o seguinte comando para instalar as dependências:
+npm install
 
-Victor Cordeiro - 65609
+Inicie o servidor com:
+npm start
 
+**Frontend**:
+Acesse a pasta admin.
+Se estiver usando o Visual Studio Code, utilize o plugin Live Server.
+Inicie o frontend com o Live Server.
 
+Observações Importantes:
+Cadastro e Login: Após iniciar o projeto, crie uma conta através do endpoint de registro e realize o login antes de usar a aplicação.
 
-COMO RODAR O PROJETO:
-
-
-entrar na pasta: livrariaApi
-
-Rodar:
-
-NPM install
-
-NPM start
-
-
-
-
-Com isso Back End Estara de Pe, logo apos:
-
-entrar na pasta: ADMIN
-
-no meu caso estou usando vsCode com o plugin 'Live Server'
-
-Rodar o Front utilizando live server
-
-
-e Pronto a aplicação fullsstack estará de pe
-
-
-OBS com o projeto rodando crie uma conta em Registrar e faço o login antes de utilizar 
+Pedro Henrique Vicino: 54289
